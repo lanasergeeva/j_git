@@ -44,12 +44,7 @@ public class AnalyzeByMap {
         for (Pupil pupil : pupils) {
             count++;
             for (Subject subject : pupil.subjects()) {
-                Integer integer = temp.get(subject.name());
-                if (integer == null) {
-                    temp.put(subject.name(), subject.score());
-                } else {
-                    temp.put(subject.name(), integer + subject.score());
-                }
+                temp.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
         return count;
